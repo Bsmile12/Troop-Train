@@ -9,14 +9,14 @@
         body {
             background-color: #f3f4f6;
             font-family: sans-serif;
-            background-image: url('Gemini_Generated_Image_tm10qgtm10qgtm10.jpg'); /* แทนที่ 'Military.jpg' ด้วยชื่อไฟล์รูปภาพของคุณ */
+            background-image: url('Gemini_Generated_Image_tm10qgtm10qgtm10.jpg');
             background-size: cover;
             background-repeat: no-repeat;
         }
         .container {
             max-width: 600px;
             margin: 50px auto;
-            background-color: rgba(255, 255, 255, 0.4); /* เพิ่มความโปร่งใสให้กับพื้นหลังคอนเทนเนอร์ */
+            background-color: rgba(255, 255, 255, 0.4);
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -62,31 +62,49 @@
         .hidden {
             display: none;
         }
+        .language-flags {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        .language-flags img {
+            width: 30px;
+            height: 22px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: transform 0.2s ease, box-shadow 0.3s ease;
+        }
+        .language-flags img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1 class="text-2xl font-bold mb-4">Military Training Resource Calculator</h1>
+        <h1 class="text-2xl font-bold mb-4" id="pageTitle">Military Training Resource Calculator</h1>
 
         <div class="input-group">
-            <label for="camp">Military Camp:</label>
+            <label for="camp" id="campLabel">Military Camp:</label>
             <select id="camp">
-                <option value="Marksman">Marksman</option>
-                <option value="Infantry">Infantry</option>
-                <option value="Lancer">Lancer</option>
+                <option value="Marksman" id="marksmanOption">Marksman</option>
+                <option value="Infantry" id="infantryOption">Infantry</option>
+                <option value="Lancer" id="lancerOption">Lancer</option>
             </select>
         </div>
 
         <div class="input-group">
-            <label for="levelUpgradeSelect">Select Level or Upgrade:</label>
+            <label for="levelUpgradeSelect" id="selectLevelUpgradeLabel">Select Level or Upgrade:</label>
             <select id="levelUpgradeSelect">
-                <option value="level">Troop Level</option>
-                <option value="upgrade">Troop Upgrade</option>
+                <option value="level" id="troopLevelOption">Troop Level</option>
+                <option value="upgrade" id="troopUpgradeOption">Troop Upgrade</option>
             </select>
         </div>
 
         <div class="input-group" id="levelSelectGroup">
-            <label for="level">Troop Level:</label>
+            <label for="level" id="troopLevelLabel">Troop Level:</label>
             <select id="level">
                 <option value="I">I</option>
                 <option value="II">II</option>
@@ -102,7 +120,7 @@
         </div>
 
         <div class="input-group hidden" id="upgradeSelectGroup">
-            <label for="upgradeLevel">Troop Upgrade:</label>
+            <label for="upgradeLevel" id="troopUpgradeLabel">Troop Upgrade:</label>
             <select id="upgradeLevel">
                 <option value="V-X">V -> X</option>
                 <option value="IX-X">IX -> X</option>
@@ -110,13 +128,20 @@
         </div>
 
         <div class="input-group">
-            <label for="quantity">Troop Quantity:</label>
+            <label for="quantity" id="troopQuantityLabel">Troop Quantity:</label>
             <input type="number" id="quantity" value="1">
         </div>
 
-        <button id="calculate" class="calculate-button">Calculate</button>
+        <button id="calculate" class="calculate-button" id="calculateButton">Calculate</button>
 
         <div id="result" class="result-area"></div>
+    </div>
+
+    <div class="language-flags">
+        <img src="https://flagcdn.com/24x18/gb.png" alt="English" onclick="setLanguage('en')" title="English">
+        <img src="https://flagcdn.com/24x18/th.png" alt="ไทย" onclick="setLanguage('th')" title="ภาษาไทย (Thai)">
+        <img src="https://flagcdn.com/24x18/cn.png" alt="中文" onclick="setLanguage('cn')" title="中文 (Chinese)">
+        <img src="https://flagcdn.com/24x18/ru.png" alt="Русский" onclick="setLanguage('ru')" title="Русский (Russian)">
     </div>
 
     <script>
@@ -171,6 +196,89 @@
             }
         };
 
+        const translations = {
+            en: {
+                pageTitle: 'Military Training Resource Calculator',
+                campLabel: 'Military Camp:',
+                marksmanOption: 'Marksman',
+                infantryOption: 'Infantry',
+                lancerOption: 'Lancer',
+                selectLevelUpgradeLabel: 'Select Level or Upgrade:',
+                troopLevelOption: 'Troop Level',
+                troopUpgradeOption: 'Troop Upgrade',
+                troopLevelLabel: 'Troop Level:',
+                troopUpgradeLabel: 'Troop Upgrade:',
+                troopQuantityLabel: 'Troop Quantity:',
+                calculateButton: 'Calculate',
+                results: 'Results:',
+                wood: 'Wood:',
+                meat: 'Meat:',
+                coal: 'Coal:',
+                iron: 'Iron:',
+                time: 'Time:'
+            },
+            th: {
+                pageTitle: 'เครื่องคำนวณทรัพยากรฝึกทหาร',
+                campLabel: 'ค่ายทหาร:',
+                marksmanOption: 'พลแม่นปืน',
+                infantryOption: 'ทหารราบ',
+                lancerOption: 'พลหอก',
+                selectLevelUpgradeLabel: 'เลือกระดับหรืออัปเกรด:',
+                troopLevelOption: 'ระดับทหาร',
+                troopUpgradeOption: 'อัปเกรดทหาร',
+                troopLevelLabel: 'ระดับทหาร:',
+                troopUpgradeLabel: 'อัปเกรดทหาร:',
+                troopQuantityLabel: 'จำนวนทหาร:',
+                calculateButton: 'คำนวณ',
+                results: 'ผลลัพธ์:',
+                wood: 'ไม้:',
+                meat: 'เนื้อ:',
+                coal: 'ถ่านหิน:',
+                iron: 'เหล็ก:',
+                time: 'เวลา:'
+            },
+            cn: {
+                pageTitle: '军事训练资源计算器',
+                campLabel: '军营:',
+                marksmanOption: '射手',
+                infantryOption: '步兵',
+                lancerOption: '枪骑兵',
+                selectLevelUpgradeLabel: '选择等级或升级:',
+                troopLevelOption: '部队等级',
+                troopUpgradeOption: '部队升级',
+                troopLevelLabel: '部队等级:',
+                troopUpgradeLabel: '部队升级:',
+                troopQuantityLabel: '部队数量:',
+                calculateButton: '计算',
+                results: '结果:',
+                wood: '木材:',
+                meat: '肉:',
+                coal: '煤:',
+                iron: '铁:',
+                time: '时间:'
+            },
+            ru: {
+                pageTitle: 'Калькулятор ресурсов для военной подготовки',
+                campLabel: 'Военный лагерь:',
+                marksmanOption: 'Стрелок',
+                infantryOption: 'Пехота',
+                lancerOption: 'Улан',
+                selectLevelUpgradeLabel: 'Выберите уровень или улучшение:',
+                troopLevelOption: 'Уровень войск',
+                troopUpgradeOption: 'Улучшение войск',
+                troopLevelLabel: 'Уровень войск:',
+                troopUpgradeLabel: 'Улучшение войск:',
+                troopQuantityLabel: 'Количество войск:',
+                calculateButton: 'Рассчитать',
+                results: 'Результаты:',
+                wood: 'Дерево:',
+                meat: 'Мясо:',
+                coal: 'Уголь:',
+                iron: 'Железо:',
+                time: 'Время:'
+            },
+        };
+
         const calculateButton = document.getElementById('calculate');
         const resultDiv = document.getElementById('result');
         const levelUpgradeSelect = document.getElementById('levelUpgradeSelect');
@@ -207,12 +315,12 @@
             const time = calculateTotalTime(data.Time, quantity);
 
             resultDiv.innerHTML = `
-                <h2 class="text-lg font-semibold mb-2">Results:</h2>
-                <p>Wood: ${formatResource(wood)}</p>
-                <p>Meat: ${formatResource(meat)}</p>
-                <p>Coal: ${formatResource(coal)}</p>
-                <p>Iron: ${formatResource(iron)}</p>
-                <p>Time: ${time}</p>
+                <h2 class="text-lg font-semibold mb-2" id="resultsTitle">${translations[currentLanguage].results}</h2>
+                <p id="woodResult">${translations[currentLanguage].wood} ${formatResource(wood)}</p>
+                <p id="meatResult">${translations[currentLanguage].meat} ${formatResource(meat)}</p>
+                <p id="coalResult">${translations[currentLanguage].coal} ${formatResource(coal)}</p>
+                <p id="ironResult">${translations[currentLanguage].iron} ${formatResource(iron)}</p>
+                <p id="timeResult">${translations[currentLanguage].time} ${time}</p>
             `;
         });
 
@@ -235,6 +343,38 @@
                 return (value / 1000).toFixed(2) + " K";
             } else {
                 return value.toFixed(2);
+            }
+        }
+
+        let currentLanguage = 'en'; // ภาษาเริ่มต้น
+
+        function setLanguage(lang) {
+            currentLanguage = lang;
+            const selected = translations[lang];
+            if (selected) {
+                document.getElementById('pageTitle').textContent = selected.pageTitle;
+                document.getElementById('campLabel').textContent = selected.campLabel;
+                document.getElementById('marksmanOption').textContent = selected.marksmanOption;
+                document.getElementById('infantryOption').textContent = selected.infantryOption;
+                document.getElementById('lancerOption').textContent = selected.lancerOption;
+                document.getElementById('selectLevelUpgradeLabel').textContent = selected.selectLevelUpgradeLabel;
+                document.getElementById('troopLevelOption').textContent = selected.troopLevelOption;
+                document.getElementById('troopUpgradeOption').textContent = selected.troopUpgradeOption;
+                document.getElementById('troopLevelLabel').textContent = selected.troopLevelLabel;
+                document.getElementById('troopUpgradeLabel').textContent = selected.troopUpgradeLabel;
+                document.getElementById('troopQuantityLabel').textContent = selected.troopQuantityLabel;
+                document.getElementById('calculateButton').textContent = selected.calculateButton;
+
+                // อัปเดตผลลัพธ์ (ถ้ามี)
+                const resultsTitle = document.getElementById('resultsTitle');
+                if (resultsTitle) {
+                    resultsTitle.textContent = selected.results;
+                    document.getElementById('woodResult').textContent = selected.wood + " " + formatResource(armyData[document.getElementById('camp').value][document.getElementById('level').value].Wood);
+                    document.getElementById('meatResult').textContent = selected.meat + " " + formatResource(armyData[document.getElementById('camp').value][document.getElementById('level').value].Meat);
+                    document.getElementById('coalResult').textContent = selected.coal + " " + formatResource(armyData[document.getElementById('camp').value][document.getElementById('level').value].Coal);
+                    document.getElementById('ironResult').textContent = selected.iron + " " + formatResource(armyData[document.getElementById('camp').value][document.getElementById('level').value].Iron);
+                    document.getElementById('timeResult').textContent = selected.time + " " + calculateTotalTime(armyData[document.getElementById('camp').value][document.getElementById('level').value].Time, document.getElementById('quantity').value);
+                }
             }
         }
     </script>
