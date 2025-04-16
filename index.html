@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Military Training Resource Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-color: #f3f4f6;
+            font-family: sans-serif;
+            background-image: url('Gemini_Generated_Image_tm10qgtm10qgtm10.jpg'); /* แทนที่ 'Military.jpg' ด้วยชื่อไฟล์รูปภาพของคุณ */
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: rgba(255, 255, 255, 0.4); /* เพิ่มความโปร่งใสให้กับพื้นหลังคอนเทนเนอร์ */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .input-group select, .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .calculate-button {
+            background-color: #4f46e5;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .calculate-button:hover {
+            background-color: #4338ca;
+        }
+        .result-area {
+            margin-top: 30px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+        .result-area h2 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        .result-area p {
+            margin-bottom: 8px;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-2xl font-bold mb-4">Military Training Resource Calculator</h1>
+
+        <div class="input-group">
+            <label for="camp">Military Camp:</label>
+            <select id="camp">
+                <option value="Marksman">Marksman</option>
+                <option value="Infantry">Infantry</option>
+                <option value="Lancer">Lancer</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label for="levelUpgradeSelect">Select Level or Upgrade:</label>
+            <select id="levelUpgradeSelect">
+                <option value="level">Troop Level</option>
+                <option value="upgrade">Troop Upgrade</option>
+            </select>
+        </div>
+
+        <div class="input-group" id="levelSelectGroup">
+            <label for="level">Troop Level:</label>
+            <select id="level">
+                <option value="I">I</option>
+                <option value="II">II</option>
+                <option value="III">III</option>
+                <option value="IV">IV</option>
+                <option value="V">V</option>
+                <option value="VI">VI</option>
+                <option value="VII">VII</option>
+                <option value="VIII">VIII</option>
+                <option value="IX">IX</option>
+                <option value="X">X</option>
+            </select>
+        </div>
+
+        <div class="input-group hidden" id="upgradeSelectGroup">
+            <label for="upgradeLevel">Troop Upgrade:</label>
+            <select id="upgradeLevel">
+                <option value="V-X">V -> X</option>
+                <option value="IX-X">IX -> X</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label for="quantity">Troop Quantity:</label>
+            <input type="number" id="quantity" value="1">
+        </div>
+
+        <button id="calculate" class="calculate-button">Calculate</button>
+
+        <div id="result" class="result-area"></div>
+    </div>
+
+    <script>
+        const armyData = {
+            "Marksman": {
+                "I": { "Wood": 3.4, "Meat": 23.0, "Coal": 6.0, "Iron": 2.0, "Time": "00:00:04" },
+                "II": { "Wood": 54.0, "Meat": 36.0, "Coal": 9.0, "Iron": 4.0, "Time": "00:00:05" },
+                "III": { "Wood": 86.0, "Meat": 58.0, "Coal": 15.0, "Iron": 5.0, "Time": "00:00:07" },
+                "IV": { "Wood": 111.0, "Meat": 75.0, "Coal": 19.0, "Iron": 6.0, "Time": "00:00:09" },
+                "V": { "Wood": 144.0, "Meat": 97.0, "Coal": 24.0, "Iron": 8.0, "Time": "00:00:11" },
+                "VI": { "Wood": 173.0, "Meat": 117.0, "Coal": 29.0, "Iron": 10.0, "Time": "00:00:13" },
+                "VII": { "Wood": 258.0, "Meat": 175.0, "Coal": 44.0, "Iron": 14.0, "Time": "00:00:17" },
+                "VIII": { "Wood": 516.0, "Meat": 349.0, "Coal": 87.0, "Iron": 28.0, "Time": "00:00:30" },
+                "IX": { "Wood": 1224.0, "Meat": 872.0, "Coal": 217.0, "Iron": 70.0, "Time": "00:00:42" },
+                "X": { "Wood": 2570.0, "Meat": 1713.0, "Coal": 433.0, "Iron": 140.0, "Time": "00:00:49" },
+                "Upgrade": {
+                    "V-X": { "Wood": 2435, "Meat": 1646, "Coal": 409, "Iron": 132, "Time": "00:00:34" },
+                    "IX-X": { "Wood": 1280, "Meat": 871, "Coal": 216, "Iron": 70, "Time": "00:00:06" }
+                }
+            },
+            "Infantry": {
+                "I": { "Wood": 27.0, "Meat": 36.0, "Coal": 7.0, "Iron": 2.0, "Time": "00:00:04" },
+                "II": { "Wood": 44.0, "Meat": 58.0, "Coal": 10.0, "Iron": 3.0, "Time": "00:00:05" },
+                "III": { "Wood": 69.0, "Meat": 92.0, "Coal": 17.0, "Iron": 4.0, "Time": "00:00:07" },
+                "IV": { "Wood": 90.0, "Meat": 120.0, "Coal": 21.0, "Iron": 5.0, "Time": "00:00:09" },
+                "V": { "Wood": 117.0, "Meat": 156.0, "Coal": 27.0, "Iron": 6.0, "Time": "00:00:11" },
+                "VI": { "Wood": 140.0, "Meat": 186.0, "Coal": 33.0, "Iron": 7.0, "Time": "00:00:13" },
+                "VII": { "Wood": 210.0, "Meat": 279.0, "Coal": 49.0, "Iron": 11.0, "Time": "00:00:17" },
+                "VIII": { "Wood": 420.0, "Meat": 558.0, "Coal": 98.0, "Iron": 21.0, "Time": "00:00:30" },
+                "IX": { "Wood": 1046.0, "Meat": 1346.0, "Coal": 244.0, "Iron": 51.0, "Time": "00:00:42" },
+                "X": { "Wood": 2080.0, "Meat": 2693.0, "Coal": 488.0, "Iron": 102.0, "Time": "00:00:49" },
+                "Upgrade": {
+                    "V-X": { "Wood": 1974, "Meat": 2632, "Coal": 461, "Iron": 96, "Time": "00:00:34" },
+                    "IX-X": { "Wood": 1045, "Meat": 1394, "Coal": 244, "Iron": 51, "Time": "00:00:06" }
+                }
+            },
+            "Lancer": {
+                "I": { "Wood": 30.0, "Meat": 32.0, "Coal": 7.0, "Iron": 2.0, "Time": "00:00:04" },
+                "II": { "Wood": 48.0, "Meat": 51.0, "Coal": 10.0, "Iron": 3.0, "Time": "00:00:05" },
+                "III": { "Wood": 76.0, "Meat": 81.0, "Coal": 16.0, "Iron": 4.0, "Time": "00:00:07" },
+                "IV": { "Wood": 99.0, "Meat": 105.0, "Coal": 21.0, "Iron": 5.0, "Time": "00:00:09" },
+                "V": { "Wood": 129.0, "Meat": 136.0, "Coal": 27.0, "Iron": 7.0, "Time": "00:00:11" },
+                "VI": { "Wood": 154.0, "Meat": 163.0, "Coal": 32.0, "Iron": 8.0, "Time": "00:00:13" },
+                "VII": { "Wood": 231.0, "Meat": 244.0, "Coal": 48.0, "Iron": 11.0, "Time": "00:00:17" },
+                "VIII": { "Wood": 461.0, "Meat": 488.0, "Coal": 95.0, "Iron": 22.0, "Time": "00:00:30" },
+                "IX": { "Wood": 1151.0, "Meat": 1220.0, "Coal": 237.0, "Iron": 55.0, "Time": "00:00:42" },
+                "X": { "Wood": 2203.0, "Meat": 2325.0, "Coal": 474.0, "Iron": 109.0, "Time": "00:00:49" },
+                "Upgrade": {
+                    "V-X": { "Wood": 2172, "Meat": 2304, "Coal": 447, "Iron": 102, "Time": "00:00:34" },
+                    "IX-X": { "Wood": 2300, "Meat": 2440, "Coal": 474, "Iron": 108, "Time": "00:00:06" }
+                }
+            }
+        };
+
+        const calculateButton = document.getElementById('calculate');
+        const resultDiv = document.getElementById('result');
+        const levelUpgradeSelect = document.getElementById('levelUpgradeSelect');
+        const levelSelectGroup = document.getElementById('levelSelectGroup');
+        const upgradeSelectGroup = document.getElementById('upgradeSelectGroup');
+
+        levelUpgradeSelect.addEventListener('change', () => {
+            if (levelUpgradeSelect.value === 'level') {
+                levelSelectGroup.classList.remove('hidden');
+                upgradeSelectGroup.classList.add('hidden');
+            } else {
+                levelSelectGroup.classList.add('hidden');
+                upgradeSelectGroup.classList.remove('hidden');
+            }
+        });
+
+        calculateButton.addEventListener('click', () => {
+            const camp = document.getElementById('camp').value;
+            const quantity = parseInt(document.getElementById('quantity').value);
+            let data;
+
+            if (levelUpgradeSelect.value === 'level') {
+                const level = document.getElementById('level').value;
+                data = armyData[camp][level];
+            } else {
+                const upgradeLevel = document.getElementById('upgradeLevel').value;
+                data = armyData[camp].Upgrade[upgradeLevel];
+            }
+
+            const wood = data.Wood * quantity;
+            const meat = data.Meat * quantity;
+            const coal = data.Coal * quantity;
+            const iron = data.Iron * quantity;
+            const time = calculateTotalTime(data.Time, quantity);
+
+            resultDiv.innerHTML = `
+                <h2 class="text-lg font-semibold mb-2">Results:</h2>
+                <p>Wood: ${formatResource(wood)}</p>
+                <p>Meat: ${formatResource(meat)}</p>
+                <p>Coal: ${formatResource(coal)}</p>
+                <p>Iron: ${formatResource(iron)}</p>
+                <p>Time: ${time}</p>
+            `;
+        });
+
+        function calculateTotalTime(time, quantity) {
+            const timeParts = time.split(':');
+            let totalSeconds = (+timeParts[0]) * 3600 + (+timeParts[1]) * 60 + (+timeParts[2]);
+            totalSeconds = totalSeconds * quantity;
+            const hours = Math.floor(totalSeconds / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
+            return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        function formatResource(value) {
+            if (value >= 1000000000) {
+                return (value / 1000000000).toFixed(2) + " B";
+            } else if (value >= 1000000) {
+                return (value / 1000000).toFixed(2) + " M";
+            } else if (value >= 1000) {
+                return (value / 1000).toFixed(2) + " K";
+            } else {
+                return value.toFixed(2);
+            }
+        }
+    </script>
+</body>
+</html>
