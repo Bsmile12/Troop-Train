@@ -142,6 +142,8 @@
         <img src="https://flagcdn.com/24x18/th.png" alt="ไทย" onclick="setLanguage('th')" title="ภาษาไทย (Thai)">
         <img src="https://flagcdn.com/24x18/cn.png" alt="中文" onclick="setLanguage('cn')" title="中文 (Chinese)">
         <img src="https://flagcdn.com/24x18/ru.png" alt="Русский" onclick="setLanguage('ru')" title="Русский (Russian)">
+        <img src="https://flagcdn.com/24x18/kr.png" alt="Korean" onclick="setLanguage('ko')" title="한국어 (Korean)">
+        <img src="https://flagcdn.com/24x18/fr.png" alt="French" onclick="setLanguage('fr')" title="Français (French)">
     </div>
 
     <script>
@@ -197,88 +199,109 @@
         };
 
         const translations = {
-            en: {
-                pageTitle: 'Military Training Resource Calculator',
-                campLabel: 'Military Camp:',
-                marksmanOption: 'Marksman',
-                infantryOption: 'Infantry',
-                lancerOption: 'Lancer',
-                selectLevelUpgradeLabel: 'Select Level or Upgrade:',
-                troopLevelOption: 'Troop Level',
-                troopUpgradeOption: 'Troop Upgrade',
-                troopLevelLabel: 'Troop Level:',
-                troopUpgradeLabel: 'Troop Upgrade:',
-                troopQuantityLabel: 'Troop Quantity:',
-                calculateButton: 'Calculate',
-                results: 'Results:',
-                wood: 'Wood:',
-                meat: 'Meat:',
-                coal: 'Coal:',
-                iron: 'Iron:',
-                time: 'Time:'
-            },
-            th: {
-                pageTitle: 'เครื่องคำนวณทรัพยากรฝึกทหาร',
-                campLabel: 'ค่ายทหาร:',
-                marksmanOption: 'พลแม่นปืน',
-                infantryOption: 'ทหารราบ',
-                lancerOption: 'พลหอก',
-                selectLevelUpgradeLabel: 'เลือกระดับหรืออัปเกรด:',
-                troopLevelOption: 'ระดับทหาร',
-                troopUpgradeOption: 'อัปเกรดทหาร',
-                troopLevelLabel: 'ระดับทหาร:',
-                troopUpgradeLabel: 'อัปเกรดทหาร:',
-                troopQuantityLabel: 'จำนวนทหาร:',
-                calculateButton: 'คำนวณ',
-                results: 'ผลลัพธ์:',
-                wood: 'ไม้:',
-                meat: 'เนื้อ:',
-                coal: 'ถ่านหิน:',
-                iron: 'เหล็ก:',
-                time: 'เวลา:'
-            },
-            cn: {
-                pageTitle: '军事训练资源计算器',
-                campLabel: '军营:',
-                marksmanOption: '射手',
-                infantryOption: '步兵',
-                lancerOption: '枪骑兵',
-                selectLevelUpgradeLabel: '选择等级或升级:',
-                troopLevelOption: '部队等级',
-                troopUpgradeOption: '部队升级',
-                troopLevelLabel: '部队等级:',
-                troopUpgradeLabel: '部队升级:',
-                troopQuantityLabel: '部队数量:',
-                calculateButton: '计算',
-                results: '结果:',
-                wood: '木材:',
-                meat: '肉:',
-                coal: '煤:',
-                iron: '铁:',
-                time: '时间:'
-            },
-            ru: {
-                pageTitle: 'Калькулятор ресурсов для военной подготовки',
-                campLabel: 'Военный лагерь:',
-                marksmanOption: 'Стрелок',
-                infantryOption: 'Пехота',
-                lancerOption: 'Улан',
-                selectLevelUpgradeLabel: 'Выберите уровень или улучшение:',
-                troopLevelOption: 'Уровень войск',
-                troopUpgradeOption: 'Улучшение войск',
-                troopLevelLabel: 'Уровень войск:',
-                troopUpgradeLabel: 'Улучшение войск:',
-                troopQuantityLabel: 'Количество войск:',
-                calculateButton: 'Рассчитать',
-                results: 'Результаты:',
-                wood: 'Дерево:',
-                meat: 'Мясо:',
-                coal: 'Уголь:',
-                iron: 'Железо:',
-                time: 'Время:'
-            },
-        };
-
+    en: {
+        pageTitle: 'Military Training Resource Calculator',
+        campLabel: 'Military Camp:',
+        marksmanOption: 'Marksman',
+        infantryOption: 'Infantry',
+        lancerOption: 'Lancer',
+        selectLevelUpgradeLabel: 'Select Level or Upgrade:',
+        troopLevelOption: 'Troop Level',
+        troopUpgradeOption: 'Troop Upgrade',
+        troopLevelLabel: 'Troop Level:',
+        troopUpgradeLabel: 'Troop Upgrade:',
+        troopQuantityLabel: 'Troop Quantity:',
+        calculateButton: 'Calculate',
+        results: 'Results:',
+        wood: 'Wood:',
+        meat: 'Meat:',
+        coal: 'Coal:',
+        iron: 'Iron:',
+        time: 'Time:'
+    },
+    th: {
+        pageTitle: 'เครื่องคำนวณทรัพยากรฝึกทหาร',
+        campLabel: 'ค่ายทหาร:',
+        marksmanOption: 'พลแม่นปืน',
+        infantryOption: 'ทหารราบ',
+        lancerOption: 'พลหอก',
+        selectLevelUpgradeLabel: 'เลือกระดับหรืออัปเกรด:',
+        troopLevelOption: 'ระดับทหาร',
+        troopUpgradeOption: 'อัปเกรดทหาร',
+        troopLevelLabel: 'ระดับทหาร:',
+        troopUpgradeLabel: 'อัปเกรดทหาร:',
+        troopQuantityLabel: 'จำนวนทหาร:',
+        calculateButton: 'คำนวณ',
+        results: 'ผลลัพธ์:',
+        wood: 'ไม้:',
+        meat: 'เนื้อ:',
+        coal: 'ถ่านหิน:',
+        iron: 'เหล็ก:',
+        time: 'เวลา:'
+    },
+    cn: {
+        pageTitle: '军事训练资源计算器',
+        campLabel: '军营:',
+        marksmanOption: '射手',
+        infantryOption: '步兵',
+        lancerOption: '枪骑兵',
+        selectLevelUpgradeLabel: '选择等级或升级:',
+        troopLevelOption: '部队等级',
+        troopUpgradeOption: '部队升级',
+        troopLevelLabel: '部队等级:',
+        troopUpgradeLabel: '部队升级:',
+        troopQuantityLabel: '部队数量:',
+        calculateButton: '计算',
+        results: '结果:',
+        wood: '木材:',
+        meat: '肉:',
+        coal: '煤:',
+        iron: '铁:',
+        time: '时间:'
+    },
+    ru: {
+        pageTitle: 'Калькулятор ресурсов для военной подготовки',
+        campLabel: 'Военный лагерь:',
+        marksmanOption: 'Стрелок',
+        infantryOption: 'Пехота',
+        lancerOption: 'Улан',
+        selectLevelUpgradeLabel: 'Выберите уровень или улучшение:',
+        troopLevelOption: 'Уровень войск',
+        troopUpgradeOption: 'Улучшение войск',
+        troopLevelLabel: 'Уровень войск:',
+        troopUpgradeLabel: 'Улучшение войск:',
+        troopQuantityLabel: 'Количество войск:',
+        calculateButton: 'Рассчитать',
+        results: 'Результаты:',
+        wood: 'Дерево:',
+        meat: 'Мясо:',
+        coal: 'Уголь:',
+        iron: 'Железо:',
+        time: 'Время:'
+    },
+    ko: {
+        pageTitle: '군사 훈련 자원 계산기',
+        campLabel: '군사 캠프:',
+        marksmanOption: '사수',
+        infantryOption: '보병',
+        lancerOption: '기병',
+        selectLevelUpgradeLabel: '레벨 또는 업그레이드 선택:',
+        troopLevelOption: '부대 레벨',
+        troopUpgradeOption: '부대 업그레이드',
+        troopLevelLabel: '부대 레벨:',
+        troopUpgradeLabel: '부대 업그레이드:',
+        troopQuantityLabel: '부대 수량:',
+        calculateButton: '계산',
+        results: '결과:',
+        wood: '나무:',
+        meat: '고기:',
+        coal: '석탄:',
+        iron: '철:',
+        time: '시간:'
+    }
+};
+let currentLanguage = 'en';
+        
         const calculateButton = document.getElementById('calculate');
         const resultDiv = document.getElementById('result');
         const levelUpgradeSelect = document.getElementById('levelUpgradeSelect');
