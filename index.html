@@ -104,15 +104,15 @@
         </div>
 
         <div class="input-group">
-            <label for="levelUpgradeSelect" id="selectLevelUpgradeLabel">Select Level or Upgrade:</label>
+            <label for="levelUpgradeSelect" id="selectLevelUpgradeLabel">Select Training or Promoting:</label>
             <select id="levelUpgradeSelect">
-                <option value="level" id="troopLevelOption">Troop Level</option>
-                <option value="upgrade" id="troopUpgradeOption">Troop Upgrade</option>
+                <option value="level" id="troopLevelOption">Troop Training</option>
+                <option value="upgrade" id="troopUpgradeOption">Troop Promoting</option>
             </select>
         </div>
 
         <div class="input-group" id="levelSelectGroup">
-            <label for="level" id="troopLevelLabel">Troop Level:</label>
+            <label for="level" id="troopLevelLabel">Troop Training:</label>
             <select id="level">
                 <option value="I">I</option>
                 <option value="II">II</option>
@@ -128,7 +128,7 @@
         </div>
 
         <div class="input-group hidden" id="upgradeSelectGroup">
-            <label for="upgradeLevel" id="troopUpgradeLabel">Troop Upgrade:</label>
+            <label for="upgradeLevel" id="troopUpgradeLabel">Troop Promoting:</label>
             <select id="upgradeLevel">
                 <option value="V-X">V -> X</option>
                 <option value="IX-X">IX -> X</option>
@@ -211,11 +211,11 @@
                 marksmanOption: 'Marksman',
                 infantryOption: 'Infantry',
                 lancerOption: 'Lancer',
-                selectLevelUpgradeLabel: 'Select Level or Upgrade:',
-                troopLevelOption: 'Troop Level',
-                troopUpgradeOption: 'Troop Upgrade',
-                troopLevelLabel: 'Troop Level:',
-                troopUpgradeLabel: 'Troop Upgrade:',
+                selectLevelUpgradeLabel: 'Select Training or Promotion:',
+                troopLevelOption: 'Troop Training',
+                troopUpgradeOption: 'Troop Promoting',
+                troopLevelLabel: 'Troop Training:',
+                troopUpgradeLabel: 'Troop Promoting:',
                 troopQuantityLabel: 'Troop Quantity:',
                 calculateButton: 'Calculate',
                 results: 'Results:',
@@ -224,18 +224,18 @@
                 coal: 'Coal:',
                 iron: 'Iron:',
                 time: 'Time:'
-            },
-            th: {
+        },
+        th: {
                 pageTitle: 'เครื่องคำนวณทรัพยากรฝึกทหาร',
                 campLabel: 'ค่ายทหาร:',
                 marksmanOption: 'พลแม่นปืน',
                 infantryOption: 'ทหารราบ',
                 lancerOption: 'พลหอก',
-                selectLevelUpgradeLabel: 'เลือกระดับหรืออัปเกรด:',
-                troopLevelOption: 'ระดับทหาร',
-                troopUpgradeOption: 'อัปเกรดทหาร',
-                troopLevelLabel: 'ระดับทหาร:',
-                troopUpgradeLabel: 'อัปเกรดทหาร:',
+                selectLevelUpgradeLabel: 'เลือกฝึกหรือเลื่อนขั้น:',
+                troopLevelOption: 'ฝึกทหาร',
+                troopUpgradeOption: 'เลื่อนขั้นทหาร',
+                troopLevelLabel: 'ฝึกทหาร:',
+                troopUpgradeLabel: 'เลื่อนขั้นทหาร:',
                 troopQuantityLabel: 'จำนวนทหาร:',
                 calculateButton: 'คำนวณ',
                 results: 'ผลลัพธ์:',
@@ -244,18 +244,18 @@
                 coal: 'ถ่านหิน:',
                 iron: 'เหล็ก:',
                 time: 'เวลา:'
-            },
-            cn: {
+        },
+        cn: {
                 pageTitle: '军事训练资源计算器',
                 campLabel: '军营:',
                 marksmanOption: '射手',
                 infantryOption: '步兵',
                 lancerOption: '枪骑兵',
-                selectLevelUpgradeLabel: '选择等级或升级:',
-                troopLevelOption: '部队等级',
-                troopUpgradeOption: '部队升级',
-                troopLevelLabel: '部队等级:',
-                troopUpgradeLabel: '部队升级:',
+                selectLevelUpgradeLabel: '选择训练或晋升:',
+                troopLevelOption: '部队训练',
+                troopUpgradeOption: '部队晋升',
+                troopLevelLabel: '部队训练:',
+                troopUpgradeLabel: '部队晋升:',
                 troopQuantityLabel: '部队数量:',
                 calculateButton: '计算',
                 results: '结果:',
@@ -264,18 +264,18 @@
                 coal: '煤:',
                 iron: '铁:',
                 time: '时间:'
-            },
-            ru: {
+        },
+        ru: {
                 pageTitle: 'Калькулятор ресурсов для военной подготовки',
                 campLabel: 'Военный лагерь:',
                 marksmanOption: 'Стрелок',
                 infantryOption: 'Пехота',
                 lancerOption: 'Улан',
-                selectLevelUpgradeLabel: 'Выберите уровень или улучшение:',
-                troopLevelOption: 'Уровень войск',
-                troopUpgradeOption: 'Улучшение войск',
-                troopLevelLabel: 'Уровень войск:',
-                troopUpgradeLabel: 'Улучшение войск:',
+                selectLevelUpgradeLabel: 'Выберите тренировку или повышение:',
+                troopLevelOption: 'Тренировка войск',
+                troopUpgradeOption: 'Повышение войск',
+                troopLevelLabel: 'Тренировка войск:',
+                troopUpgradeLabel: 'Повышение войск:',
                 troopQuantityLabel: 'Количество войск:',
                 calculateButton: 'Рассчитать',
                 results: 'Результаты:',
@@ -284,7 +284,8 @@
                 coal: 'Уголь:',
                 iron: 'Железо:',
                 time: 'Время:'
-            },
+            }
+
         };
 
         const calculateButton = document.getElementById('calculate');
