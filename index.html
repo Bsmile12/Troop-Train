@@ -140,6 +140,11 @@
             <input type="number" id="quantity" value="1">
         </div>
 
+        <div class="input-group">
+            <label for="timeReduction" id="timeReductionLabel">Time Reduction Buff (%):</label>
+            <input type="number" id="timeReduction" value="0" min="0" max="99">
+        </div>
+
         <button id="calculate" class="calculate-button" id="calculateButton">Calculate</button>
 
         <div id="result" class="result-area"></div>
@@ -155,51 +160,51 @@
     <script>
         const armyData = {
             "Marksman": {
-                "I": { "Wood": 3.4, "Meat": 23.0, "Coal": 6.0, "Iron": 2.0, "Time": "00:00:04" },
-                "II": { "Wood": 54.0, "Meat": 36.0, "Coal": 9.0, "Iron": 4.0, "Time": "00:00:05" },
-                "III": { "Wood": 86.0, "Meat": 58.0, "Coal": 15.0, "Iron": 5.0, "Time": "00:00:07" },
-                "IV": { "Wood": 111.0, "Meat": 75.0, "Coal": 19.0, "Iron": 6.0, "Time": "00:00:09" },
-                "V": { "Wood": 144.0, "Meat": 97.0, "Coal": 24.0, "Iron": 8.0, "Time": "00:00:11" },
-                "VI": { "Wood": 173.0, "Meat": 117.0, "Coal": 29.0, "Iron": 10.0, "Time": "00:00:13" },
-                "VII": { "Wood": 258.0, "Meat": 175.0, "Coal": 44.0, "Iron": 14.0, "Time": "00:00:17" },
-                "VIII": { "Wood": 516.0, "Meat": 349.0, "Coal": 87.0, "Iron": 28.0, "Time": "00:00:30" },
-                "IX": { "Wood": 1224.0, "Meat": 872.0, "Coal": 217.0, "Iron": 70.0, "Time": "00:00:42" },
-                "X": { "Wood": 2570.0, "Meat": 1713.0, "Coal": 433.0, "Iron": 140.0, "Time": "00:00:49" },
+                "I": { "Wood": 3.4, "Meat": 23.0, "Coal": 6.0, "Iron": 2.0, "Time": "00:00:12" },
+                "II": { "Wood": 54.0, "Meat": 36.0, "Coal": 9.0, "Iron": 4.0, "Time": "00:00:17" },
+                "III": { "Wood": 86.0, "Meat": 58.0, "Coal": 15.0, "Iron": 5.0, "Time": "00:00:24" },
+                "IV": { "Wood": 111.0, "Meat": 75.0, "Coal": 19.0, "Iron": 6.0, "Time": "00:00:32" },
+                "V": { "Wood": 144.0, "Meat": 97.0, "Coal": 24.0, "Iron": 8.0, "Time": "00:00:44" },
+                "VI": { "Wood": 173.0, "Meat": 117.0, "Coal": 29.0, "Iron": 10.0, "Time": "00:01:00" },
+                "VII": { "Wood": 258.0, "Meat": 175.0, "Coal": 44.0, "Iron": 14.0, "Time": "0:01:23" },
+                "VIII": { "Wood": 516.0, "Meat": 349.0, "Coal": 87.0, "Iron": 28.0, "Time": "00:01:53" },
+                "IX": { "Wood": 1224.0, "Meat": 872.0, "Coal": 217.0, "Iron": 70.0, "Time": "00:02:11" },
+                "X": { "Wood": 2570.0, "Meat": 1713.0, "Coal": 433.0, "Iron": 140.0, "Time": "00:02:32" },
                 "Upgrade": {
-                    "V-X": { "Wood": 2435, "Meat": 1646, "Coal": 409, "Iron": 132, "Time": "00:00:34" },
-                    "IX-X": { "Wood": 1280, "Meat": 871, "Coal": 216, "Iron": 70, "Time": "00:00:06" }
+                    "V-X": { "Wood": 2435, "Meat": 1646, "Coal": 409, "Iron": 132, "Time": "00:01:48" },
+                    "IX-X": { "Wood": 1280, "Meat": 871, "Coal": 216, "Iron": 70, "Time": "00:00:21" }
                 }
             },
             "Infantry": {
-                "I": { "Wood": 27.0, "Meat": 36.0, "Coal": 7.0, "Iron": 2.0, "Time": "00:00:04" },
-                "II": { "Wood": 44.0, "Meat": 58.0, "Coal": 10.0, "Iron": 3.0, "Time": "00:00:05" },
-                "III": { "Wood": 69.0, "Meat": 92.0, "Coal": 17.0, "Iron": 4.0, "Time": "00:00:07" },
-                "IV": { "Wood": 90.0, "Meat": 120.0, "Coal": 21.0, "Iron": 5.0, "Time": "00:00:09" },
-                "V": { "Wood": 117.0, "Meat": 156.0, "Coal": 27.0, "Iron": 6.0, "Time": "00:00:11" },
-                "VI": { "Wood": 140.0, "Meat": 186.0, "Coal": 33.0, "Iron": 7.0, "Time": "00:00:13" },
-                "VII": { "Wood": 210.0, "Meat": 279.0, "Coal": 49.0, "Iron": 11.0, "Time": "00:00:17" },
-                "VIII": { "Wood": 420.0, "Meat": 558.0, "Coal": 98.0, "Iron": 21.0, "Time": "00:00:30" },
-                "IX": { "Wood": 1046.0, "Meat": 1346.0, "Coal": 244.0, "Iron": 51.0, "Time": "00:00:42" },
-                "X": { "Wood": 2080.0, "Meat": 2693.0, "Coal": 488.0, "Iron": 102.0, "Time": "00:00:49" },
+                "I": { "Wood": 27.0, "Meat": 36.0, "Coal": 7.0, "Iron": 2.0, "Time": "00:00:12" },
+                "II": { "Wood": 44.0, "Meat": 58.0, "Coal": 10.0, "Iron": 3.0, "Time": "00:00:17" },
+                "III": { "Wood": 69.0, "Meat": 92.0, "Coal": 17.0, "Iron": 4.0, "Time": "00:00:24" },
+                "IV": { "Wood": 90.0, "Meat": 120.0, "Coal": 21.0, "Iron": 5.0, "Time": "00:00:32" },
+                "V": { "Wood": 117.0, "Meat": 156.0, "Coal": 27.0, "Iron": 6.0, "Time": "00:00:44" },
+                "VI": { "Wood": 140.0, "Meat": 186.0, "Coal": 33.0, "Iron": 7.0, "Time": "00:01:00" },
+                "VII": { "Wood": 210.0, "Meat": 279.0, "Coal": 49.0, "Iron": 11.0, "Time": "0:01:23" },
+                "VIII": { "Wood": 420.0, "Meat": 558.0, "Coal": 98.0, "Iron": 21.0, "Time": "00:01:53" },
+                "IX": { "Wood": 1046.0, "Meat": 1346.0, "Coal": 244.0, "Iron": 51.0, "Time": "00:02:11" },
+                "X": { "Wood": 2080.0, "Meat": 2693.0, "Coal": 488.0, "Iron": 102.0, "Time": "00:02:32" },
                 "Upgrade": {
-                    "V-X": { "Wood": 1974, "Meat": 2632, "Coal": 461, "Iron": 96, "Time": "00:00:34" },
-                    "IX-X": { "Wood": 1045, "Meat": 1394, "Coal": 244, "Iron": 51, "Time": "00:00:06" }
+                    "V-X": { "Wood": 1974, "Meat": 2632, "Coal": 461, "Iron": 96, "Time": "00:01:48" },
+                    "IX-X": { "Wood": 1045, "Meat": 1394, "Coal": 244, "Iron": 51, "Time": "00:00:21" }
                 }
             },
             "Lancer": {
-                "I": { "Wood": 30.0, "Meat": 32.0, "Coal": 7.0, "Iron": 2.0, "Time": "00:00:04" },
-                "II": { "Wood": 48.0, "Meat": 51.0, "Coal": 10.0, "Iron": 3.0, "Time": "00:00:05" },
-                "III": { "Wood": 76.0, "Meat": 81.0, "Coal": 16.0, "Iron": 4.0, "Time": "00:00:07" },
-                "IV": { "Wood": 99.0, "Meat": 105.0, "Coal": 21.0, "Iron": 5.0, "Time": "00:00:09" },
-                "V": { "Wood": 129.0, "Meat": 136.0, "Coal": 27.0, "Iron": 7.0, "Time": "00:00:11" },
-                "VI": { "Wood": 154.0, "Meat": 163.0, "Coal": 32.0, "Iron": 8.0, "Time": "00:00:13" },
-                "VII": { "Wood": 231.0, "Meat": 244.0, "Coal": 48.0, "Iron": 11.0, "Time": "00:00:17" },
-                "VIII": { "Wood": 461.0, "Meat": 488.0, "Coal": 95.0, "Iron": 22.0, "Time": "00:00:30" },
-                "IX": { "Wood": 1151.0, "Meat": 1220.0, "Coal": 237.0, "Iron": 55.0, "Time": "00:00:42" },
-                "X": { "Wood": 2203.0, "Meat": 2325.0, "Coal": 474.0, "Iron": 109.0, "Time": "00:00:49" },
+                "I": { "Wood": 30.0, "Meat": 32.0, "Coal": 7.0, "Iron": 2.0, "Time": "00:00:12" },
+                "II": { "Wood": 48.0, "Meat": 51.0, "Coal": 10.0, "Iron": 3.0, "Time": "00:00:17" },
+                "III": { "Wood": 76.0, "Meat": 81.0, "Coal": 16.0, "Iron": 4.0, "Time": "00:00:24" },
+                "IV": { "Wood": 99.0, "Meat": 105.0, "Coal": 21.0, "Iron": 5.0, "Time": "00:00:32" },
+                "V": { "Wood": 129.0, "Meat": 136.0, "Coal": 27.0, "Iron": 7.0, "Time": "00:00:44" },
+                "VI": { "Wood": 154.0, "Meat": 163.0, "Coal": 32.0, "Iron": 8.0, "Time": "00:01:00" },
+                "VII": { "Wood": 231.0, "Meat": 244.0, "Coal": 48.0, "Iron": 11.0, "Time": "00:01:23" },
+                "VIII": { "Wood": 461.0, "Meat": 488.0, "Coal": 95.0, "Iron": 22.0, "Time": "00:01:53" },
+                "IX": { "Wood": 1151.0, "Meat": 1220.0, "Coal": 237.0, "Iron": 55.0, "Time": "00:02:11" },
+                "X": { "Wood": 2203.0, "Meat": 2325.0, "Coal": 474.0, "Iron": 109.0, "Time": "00:02:32" },
                 "Upgrade": {
-                    "V-X": { "Wood": 2172, "Meat": 2304, "Coal": 447, "Iron": 102, "Time": "00:00:34" },
-                    "IX-X": { "Wood": 2300, "Meat": 2440, "Coal": 474, "Iron": 108, "Time": "00:00:06" }
+                    "V-X": { "Wood": 2172, "Meat": 2304, "Coal": 447, "Iron": 102, "Time": "00:01:48" },
+                    "IX-X": { "Wood": 2300, "Meat": 2440, "Coal": 474, "Iron": 108, "Time": "00:00:21" }
                 }
             }
         };
@@ -217,6 +222,7 @@
                 troopLevelLabel: 'Troop Training:',
                 troopUpgradeLabel: 'Troop Promoting:',
                 troopQuantityLabel: 'Troop Quantity:',
+                timeReductionLabel: 'Time Reduction Buff (%):',
                 calculateButton: 'Calculate',
                 results: 'Results:',
                 wood: 'Wood:',
@@ -224,8 +230,8 @@
                 coal: 'Coal:',
                 iron: 'Iron:',
                 time: 'Time:'
-        },
-        th: {
+            },
+            th: {
                 pageTitle: 'เครื่องคำนวณทรัพยากรฝึกทหาร',
                 campLabel: 'ค่ายทหาร:',
                 marksmanOption: 'พลแม่นปืน',
@@ -237,6 +243,7 @@
                 troopLevelLabel: 'ฝึกทหาร:',
                 troopUpgradeLabel: 'เลื่อนขั้นทหาร:',
                 troopQuantityLabel: 'จำนวนทหาร:',
+                timeReductionLabel: 'บัฟลดเวลาฝึก (%):',
                 calculateButton: 'คำนวณ',
                 results: 'ผลลัพธ์:',
                 wood: 'ไม้:',
@@ -244,8 +251,8 @@
                 coal: 'ถ่านหิน:',
                 iron: 'เหล็ก:',
                 time: 'เวลา:'
-        },
-        cn: {
+            },
+            cn: {
                 pageTitle: '军事训练资源计算器',
                 campLabel: '军营:',
                 marksmanOption: '射手',
@@ -257,6 +264,7 @@
                 troopLevelLabel: '部队训练:',
                 troopUpgradeLabel: '部队晋升:',
                 troopQuantityLabel: '部队数量:',
+                timeReductionLabel: '时间减少增益 (%):',
                 calculateButton: '计算',
                 results: '结果:',
                 wood: '木材:',
@@ -264,8 +272,8 @@
                 coal: '煤:',
                 iron: '铁:',
                 time: '时间:'
-        },
-        ru: {
+            },
+            ru: {
                 pageTitle: 'Калькулятор ресурсов для военной подготовки',
                 campLabel: 'Военный лагерь:',
                 marksmanOption: 'Стрелок',
@@ -277,6 +285,7 @@
                 troopLevelLabel: 'Тренировка войск:',
                 troopUpgradeLabel: 'Повышение войск:',
                 troopQuantityLabel: 'Количество войск:',
+                timeReductionLabel: 'Бафф снижения времени (%):',
                 calculateButton: 'Рассчитать',
                 results: 'Результаты:',
                 wood: 'Дерево:',
@@ -307,6 +316,7 @@
         calculateButton.addEventListener('click', () => {
             const camp = document.getElementById('camp').value;
             const quantity = parseInt(document.getElementById('quantity').value);
+            const timeReduction = parseFloat(document.getElementById('timeReduction').value) / 100;
             let data;
 
             if (levelUpgradeSelect.value === 'level') {
@@ -321,7 +331,9 @@
             const meat = data.Meat * quantity;
             const coal = data.Coal * quantity;
             const iron = data.Iron * quantity;
-            const time = calculateTotalTime(data.Time, quantity);
+            const baseTotalSeconds = calculateTotalSeconds(data.Time) * quantity;
+            const adjustedSeconds = baseTotalSeconds / (1 + timeReduction); // ใช้สูตรคำนวณบัฟเวลาที่ให้มา
+            const time = formatTime(adjustedSeconds);
 
             resultDiv.innerHTML = `
                 <h2 class="text-lg font-semibold mb-2" id="resultsTitle">${translations[currentLanguage].results}</h2>
@@ -333,13 +345,15 @@
             `;
         });
 
-        function calculateTotalTime(time, quantity) {
+        function calculateTotalSeconds(time) {
             const timeParts = time.split(':');
-            let totalSeconds = (+timeParts[0]) * 3600 + (+timeParts[1]) * 60 + (+timeParts[2]);
-            totalSeconds = totalSeconds * quantity;
+            return (+timeParts[0]) * 3600 + (+timeParts[1]) * 60 + (+timeParts[2]);
+        }
+
+        function formatTime(totalSeconds) {
             const hours = Math.floor(totalSeconds / 3600);
             const minutes = Math.floor((totalSeconds % 3600) / 60);
-            const seconds = totalSeconds % 60;
+            const seconds = Math.floor(totalSeconds % 60);
             return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
         }
 
@@ -372,17 +386,34 @@
                 document.getElementById('troopLevelLabel').textContent = selected.troopLevelLabel;
                 document.getElementById('troopUpgradeLabel').textContent = selected.troopUpgradeLabel;
                 document.getElementById('troopQuantityLabel').textContent = selected.troopQuantityLabel;
+                document.getElementById('timeReductionLabel').textContent = selected.timeReductionLabel;
                 document.getElementById('calculateButton').textContent = selected.calculateButton;
 
                 // อัปเดตผลลัพธ์ (ถ้ามี)
                 const resultsTitle = document.getElementById('resultsTitle');
-                if (resultsTitle) {
+                if (resultsTitle && resultDiv.innerHTML) {
                     resultsTitle.textContent = selected.results;
-                    document.getElementById('woodResult').textContent = selected.wood + " " + formatResource(armyData[document.getElementById('camp').value][document.getElementById('level').value].Wood);
-                    document.getElementById('meatResult').textContent = selected.meat + " " + formatResource(armyData[document.getElementById('camp').value][document.getElementById('level').value].Meat);
-                    document.getElementById('coalResult').textContent = selected.coal + " " + formatResource(armyData[document.getElementById('camp').value][document.getElementById('level').value].Coal);
-                    document.getElementById('ironResult').textContent = selected.iron + " " + formatResource(armyData[document.getElementById('camp').value][document.getElementById('level').value].Iron);
-                    document.getElementById('timeResult').textContent = selected.time + " " + calculateTotalTime(armyData[document.getElementById('camp').value][document.getElementById('level').value].Time, document.getElementById('quantity').value);
+                    const camp = document.getElementById('camp').value;
+                    const quantity = parseInt(document.getElementById('quantity').value);
+                    const timeReduction = parseFloat(document.getElementById('timeReduction').value) / 100;
+                    let data;
+
+                    if (levelUpgradeSelect.value === 'level') {
+                        const level = document.getElementById('level').value;
+                        data = armyData[camp][level];
+                    } else {
+                        const upgradeLevel = document.getElementById('upgradeLevel').value;
+                        data = armyData[camp].Upgrade[upgradeLevel];
+                    }
+
+                    document.getElementById('woodResult').textContent = selected.wood + " " + formatResource(data.Wood * quantity);
+                    document.getElementById('meatResult').textContent = selected.meat + " " + formatResource(data.Meat * quantity);
+                    document.getElementById('coalResult').textContent = selected.coal + " " + formatResource(data.Coal * quantity);
+                    document.getElementById('ironResult').textContent = selected.iron + " " + formatResource(data.Iron * quantity);
+                    const baseTotalSeconds = calculateTotalSeconds(data.Time) * quantity;
+                    const adjustedSeconds = baseTotalSeconds / (1 + timeReduction); // ใช้สูตรคำนวณบัฟเวลาที่ให้มา
+                    const time = formatTime(adjustedSeconds);
+                    document.getElementById('timeResult').textContent = selected.time + " " + time;
                 }
             }
         }
